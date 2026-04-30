@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+use App\Models\Food;
+
 use Illuminate\Support\Facades\Auth;
 
 class Homecontroller extends Controller
 {
     public function my_home()
     {
-        return view('home.index');
+        $data = Food::all();
+        return view('home.index',compact('data'));
     }
     
 

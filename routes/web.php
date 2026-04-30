@@ -11,11 +11,19 @@ route::get('/',[Homecontroller::class,'my_home']);
 
 route::get('/home',[Homecontroller::class,'index']); 
 
-route::get('/add_food',[Admincontroller::class,'add_food']); 
+route::get('/add_food',[AdminController::class,'add_food']); 
 
-route::post('/upload_food',[Admincontroller::class,'upload_food']); 
+route::post('/upload_food',[AdminController::class,'upload_food']); 
 
+route::get('/view_food',[AdminController::class,'view_food']); 
 
+route::get('/delete_food/{id}',[AdminController::class,'delete_food']);
+
+route::get('/update_food/{id}',[AdminController::class,'update_food']); 
+
+route::post('/edit_food/{id}',[AdminController::class,'edit_food']); 
+
+Route::get('/blog', [Homecontroller::class, 'blog']);
 
 Route::middleware([
     'auth:sanctum',
