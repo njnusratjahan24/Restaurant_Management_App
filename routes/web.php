@@ -23,7 +23,8 @@ route::get('/update_food/{id}',[AdminController::class,'update_food']);
 
 route::post('/edit_food/{id}',[AdminController::class,'edit_food']); 
 
-Route::get('/blog', [Homecontroller::class, 'blog']);
+route::post('/add_cart/{id}',[Homecontroller::class,'add_cart']); 
+
 
 Route::middleware([
     'auth:sanctum',
