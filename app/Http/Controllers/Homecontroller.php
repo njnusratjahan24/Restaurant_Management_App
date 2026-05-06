@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Food;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Homecontroller extends Controller
 {
@@ -44,7 +46,28 @@ class Homecontroller extends Controller
     {
         if(Auth::id())
             {
-                echo"user is logged in" ; 
+                $food =Food::find($id); 
+
+                $cart_title = $food->title;
+
+                $cart_Details = $food->detail;
+
+                $cart_price = Str::remove('$',$food->price);
+
+                $cart_image = $food->image;
+
+                $data =new Cart;
+
+                $data->title = $cart_title;
+                $data->details = $cart_Details;
+                $data->price = $cart_price * $request->qty ;
+                $data->image = $cart_image;
+                $data->quantity = $request->qty;
+                $data->userid = Auth()->user()->id;
+                $data->save();
+                return redirect()->back();
+
+                
 
             }
             else
@@ -53,5 +76,13 @@ class Homecontroller extends Controller
 
             }
           
+    }
+
+
+    public function my_cart()
+    {
+        $user_id = Auth()->user()->id;
+        $data = Cart::where('userid','=',$user_id)->get();
+        return view('home.my_cart',compact('data'));
     }
 }

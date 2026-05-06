@@ -20,13 +20,13 @@
         
         @csrf
 
-                            <input value="1" type="number" min="1" required>
+                            <input value="1" type="number" min="1" name="qty" required>
                             
                             <input class="btn btn-info" type="submit" value="Add to cart">
 
                             </form> 
 
-                            </br></br></br>
+                            </br></br></br></br></br>
                         
                         </div>
                     </div>
