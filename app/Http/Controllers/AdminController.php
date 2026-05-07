@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Food;
 
+use App\Models\Order;
+
+
 
 class AdminController extends Controller
 {
@@ -81,7 +84,52 @@ $request->image->move('food_img',$imagename);
 
         return redirect('view_food');
 
+
     }
+
+    public function orders()
+    {
+        $data = Order::all();
+        return view('admin.order',compact('data'));
+    }
+
+    public function on_the_way($id)
+    {
+        $data = Order::find($id);
+        $data->delivary_status ="On the way";
+        $data->save();
+        return redirect()->back();
+
+   
+    }
+
+     public function delivered($id)
+    {
+        $data = Order::find($id);
+        $data->delivary_status ="Delivered";
+        $data->save();
+        return redirect()->back();
+
+   
+    }
+
+     public function canceled($id)
+    {
+        $data = Order::find($id);
+        $data->delivary_status ="Canceled";
+        $data->save();
+        return redirect()->back();
+
+   
+    }
+
+     public function reservations()
+     {
+        return view('admin.reservation');
+
+
+     }
+
 
 
 

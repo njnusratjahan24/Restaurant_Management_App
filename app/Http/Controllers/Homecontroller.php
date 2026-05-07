@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Food;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -85,4 +87,62 @@ class Homecontroller extends Controller
         $data = Cart::where('userid','=',$user_id)->get();
         return view('home.my_cart',compact('data'));
     }
+
+    public function remove_cart($id)
+    {
+        $data= Cart::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+
+    public function confirm_order(Request $request)
+    {
+        $user_id= Auth()->user()->id;
+        $cart = Cart::where('userid','=',$user_id)->get();
+
+         foreach($cart as $cart)
+         {
+            $order = new Order;
+            $order->name =$request->name;
+            $order->email =$request->email;
+            $order->phone =$request->phone;
+            $order->address =$request->address;
+            $order->title =$cart->title ;
+            $order->quantity =$cart->quantity;
+            $order->price =$cart->price;
+            $order->image =$cart->image;
+            $order->save();
+
+            $data = Cart::find($cart->id);
+            $data->delete();
+                
+
+
+         }
+         return redirect()->back();
+ 
+
+
+    }
+
+    public function book_table(Request $request)
+    {
+        $data = new Book;
+        $data->phone = $request->phone;
+        $data->guest = $request->n_guest;
+        $data->time = $request->time;
+        $data->date = $request->date;
+
+        $data->save();
+        return redirect()->back();
+
+
+     
+    }
+
+
+
+
+
 }

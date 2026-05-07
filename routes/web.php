@@ -27,6 +27,22 @@ route::post('/add_cart/{id}',[Homecontroller::class,'add_cart']);
 
 route::get('/my_cart',[Homecontroller::class,'my_cart']);
 
+route::get('/remove_cart/{id}',[Homecontroller::class,'remove_cart']);
+
+route::post('/confirm_order',[Homecontroller::class,'confirm_order']);
+
+route::get('/orders',[AdminController::class,'orders']);
+
+route::get('/on_the_way/{id}',[AdminController::class,'on_the_way']);
+
+route::get('/delivered/{id}',[AdminController::class,'delivered']);
+
+route::get('/canceled/{id}',[AdminController::class,'canceled']);
+
+route::post('/book_table',[Homecontroller::class,'book_table']);
+
+route::get('/reservations',[AdminController::class,'reservations']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
