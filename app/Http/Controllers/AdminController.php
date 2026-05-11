@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Food;
 
+use App\Models\Book;
+
 use App\Models\Order;
 
 
@@ -125,7 +127,8 @@ $request->image->move('food_img',$imagename);
 
      public function reservations()
      {
-        return view('admin.reservation');
+        $book = Book::all();
+        return view('admin.reservation',compact('book'));
 
 
      }

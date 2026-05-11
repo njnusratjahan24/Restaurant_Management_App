@@ -38,6 +38,8 @@ class Homecontroller extends Controller
             }
             else
             {
+                
+
                 $data = Food::all();
                 return view('admin.index', compact('data'));
             }

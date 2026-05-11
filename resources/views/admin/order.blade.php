@@ -58,6 +58,7 @@
                 <th>Delivary_Status</th>
                 <th>Change_Status</th>
             </tr>
+            
             @foreach($data as $data)
 
             <tr>
